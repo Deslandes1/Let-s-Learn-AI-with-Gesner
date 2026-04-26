@@ -73,24 +73,32 @@ def login_page():
     st.markdown("<h1>🤖 Let's Learn AI with Gesner</h1>", unsafe_allow_html=True)
     st.markdown("<p>Master ChatGPT, Gemini, DeepSeek, Grok & more – 20 interactive lessons</p>", unsafe_allow_html=True)
     
-    # Fixed AI icon URLs – all working
-    ai_icons = [
-        "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg",
-        "https://cdn.simpleicons.org/googlecloud/4285F4",  # Gemini placeholder
-        "https://deepseek.com/favicon.ico",
-        "https://x.ai/favicon.ico",
-        "https://claude.ai/favicon.ico",
-        "https://github.githubassets.com/favicons/favicon.svg",
-        "https://perplexity.ai/favicon.ico",
-        "https://midjourney.com/favicon.ico",
-        "https://huggingface.co/favicon.ico",
-        "https://stability.ai/favicon.ico",
-        "https://runwayml.com/favicon.ico",
-        "https://elevenlabs.io/favicon.ico"
+    # All 20 AI logos (using reliable official or public images)
+    ai_logos = [
+        "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg",          # ChatGPT
+        "https://www.gstatic.com/lamda/images/gemini_favicon_197x197_2ef9878c.png",      # Gemini
+        "https://deepseek.com/favicon.ico",                                              # DeepSeek
+        "https://abs.twimg.com/responsive-web/client-web/icon-ios.77d25eba.png",        # Grok (X)
+        "https://claude.ai/favicon.ico",                                                  # Claude
+        "https://github.githubassets.com/favicons/favicon.svg",                           # GitHub Copilot
+        "https://perplexity.ai/favicon.ico",                                              # Perplexity
+        "https://cdn.discordapp.com/icons/662267976984297473/83e3a1d11b5e8d1c8c9c6b1e4f3d7e8a.webp?size=96", # Midjourney (Discord logo)
+        "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg",          # DALL‑E (same as ChatGPT)
+        "https://leonardo.ai/favicon.ico",                                                # Leonardo.ai
+        "https://runwayml.com/favicon.ico",                                               # Runway ML
+        "https://elevenlabs.io/favicon.ico",                                              # ElevenLabs
+        "https://stability.ai/favicon.ico",                                               # Stable Diffusion
+        "https://huggingface.co/favicon.ico",                                             # Hugging Face
+        "https://github.com/fluidicon.png",                                               # AutoGPT
+        "https://agentgpt.com/favicon.ico",                                               # AgentGPT
+        "https://python.langchain.com/favicon.ico",                                       # LangChain
+        "https://www.llamaindex.ai/favicon.ico",                                          # LlamaIndex
+        "https://open-assistant.io/favicon.ico",                                          # OpenAssistant
+        "https://poe.com/favicon.ico"                                                     # Poe
     ]
     st.markdown('<div class="ai-icon-grid">', unsafe_allow_html=True)
-    for icon in ai_icons:
-        st.markdown(f'<div class="ai-icon"><img src="{icon}"><br><small>AI</small></div>', unsafe_allow_html=True)
+    for logo in ai_logos:
+        st.markdown(f'<div class="ai-icon"><img src="{logo}"><br><small>AI</small></div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
     
     with st.form("login_form"):
@@ -111,7 +119,7 @@ def login_page():
     st.sidebar.markdown("✉️ deslandes78@gmail.com")
     st.sidebar.markdown("[🌍 Visit our website](https://globalinternetsitepy-abh7v6tnmskxxnuplrdcgk.streamlit.app)")
 
-# ---------- LESSONS DATA (20 UNIQUE LESSONS) WITH FIXED IMAGES ----------
+# ---------- LESSONS DATA (20 UNIQUE LESSONS WITH PROPER LOGOS) ----------
 lessons = [
     {
         "title": "Lesson 1: ChatGPT – Your AI Assistant",
@@ -121,7 +129,7 @@ lessons = [
     },
     {
         "title": "Lesson 2: Google Gemini – Multimodal Power",
-        "image": "https://cdn.simpleicons.org/googlechat/0F9D58",
+        "image": "https://www.gstatic.com/lamda/images/gemini_favicon_197x197_2ef9878c.png",
         "text": "**What it does:** Gemini (formerly Bard) is Google's most advanced AI. It understands text, images, audio, and video. Integrated with Google Workspace (Gmail, Docs, Drive).\n\n**Setup on Phone:** Install Google Gemini app (Android) or use Google app on iOS with Gemini enabled. Sign in with Google account.\n\n**Setup on Computer:** Visit gemini.google.com. Sign in. Use directly. For advanced features, subscribe to Gemini Advanced (part of Google One AI Premium).",
         "read_aloud": "Google Gemini is Google's most advanced AI. It understands text, images, audio, and video. Setup: use the app on phone or visit the website on computer."
     },
@@ -157,7 +165,7 @@ lessons = [
     },
     {
         "title": "Lesson 8: Midjourney – AI Image Generator",
-        "image": "https://midjourney.com/favicon.ico",
+        "image": "https://cdn.discordapp.com/icons/662267976984297473/83e3a1d11b5e8d1c8c9c6b1e4f3d7e8a.webp?size=96",
         "text": "**What it does:** Midjourney generates stunning images from text prompts. Runs inside Discord. Known for artistic styles.\n\n**Setup on Phone:** Install Discord, join Midjourney server. Use /imagine command. Free trial limited, then subscription ($10–$120/month).\n\n**Setup on Computer:** Same – use Discord desktop app or web version.",
         "read_aloud": "Midjourney generates images from text prompts inside Discord. Requires subscription after trial."
     },
