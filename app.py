@@ -79,7 +79,6 @@ st.markdown("""
         background-color: #f1f1f1;
         border-radius: 20px;
     }
-    /* Make columns tighter for the list */
     .stColumn {
         padding: 0 !important;
     }
@@ -88,22 +87,23 @@ st.markdown("""
 
 # ---------- LOGIN PAGE ----------
 def login_page():
+    # Main login container with gradient background
     st.markdown('<div class="login-container">', unsafe_allow_html=True)
     st.markdown("<h2>🤖 Let's Learn AI with Gesner</h2>", unsafe_allow_html=True)
     st.markdown("<p style='font-size:0.9rem;'>20 lessons to master the best AI tools</p>", unsafe_allow_html=True)
     
-    # Top square: only Gemini (small) plus maybe Claude and Perplexity (all small)
-    working_icons = [
-        "https://www.gstatic.com/lamda/images/gemini_favicon_197x197_2ef9878c.png",  # Gemini
-        "https://claude.ai/favicon.ico",                                              # Claude
-        "https://perplexity.ai/favicon.ico"                                           # Perplexity
-    ]
-    st.markdown('<div class="top-square">', unsafe_allow_html=True)
-    for icon in working_icons:
-        st.markdown(f'<img src="{icon}">', unsafe_allow_html=True)
-    st.markdown('</div>', unsafe_allow_html=True)
+    # Compact top square with working AI symbols
+    st.markdown("""
+    <div class="top-square">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT">
+        <img src="https://www.gstatic.com/lamda/images/gemini_favicon_197x197_2ef9878c.png" alt="Gemini">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Claude_AI_logo.svg" alt="Claude">
+        <img src="https://perplexity.ai/favicon.ico" alt="Perplexity">
+        <img src="https://huggingface.co/favicon.ico" alt="Hugging Face">
+    </div>
+    """, unsafe_allow_html=True)
     
-    # List of all 20 AI tools with lesson numbers (compact)
+    # List of all 20 AI tools with lesson numbers (two columns)
     ai_tools = [
         "1. ChatGPT", "2. Google Gemini", "3. DeepSeek", "4. Grok", "5. Claude",
         "6. GitHub Copilot", "7. Perplexity AI", "8. Midjourney", "9. DALL‑E 3", "10. Leonardo.ai",
@@ -111,7 +111,6 @@ def login_page():
         "16. AgentGPT", "17. LangChain", "18. LlamaIndex", "19. OpenAssistant", "20. Poe"
     ]
     st.markdown('<div class="ai-list"><h3>📚 What you will learn:</h3>', unsafe_allow_html=True)
-    # Use two columns for compact display
     col1, col2 = st.columns(2)
     for i, tool in enumerate(ai_tools):
         if i % 2 == 0:
@@ -120,6 +119,7 @@ def login_page():
             col2.markdown(f"✅ {tool}")
     st.markdown('</div>', unsafe_allow_html=True)
     
+    # Password login form
     with st.form("login_form"):
         password = st.text_input("🔐 Enter Password", type="password", placeholder="Password: 20082010")
         if st.form_submit_button("✨ Unlock Lessons ✨"):
@@ -127,7 +127,7 @@ def login_page():
                 st.session_state.authenticated = True
                 st.rerun()
             else:
-                st.error("Incorrect password. Hint: 20082010")
+                st.error("Incorrect password.")
     st.markdown("</div>", unsafe_allow_html=True)
     
     # Sidebar on login page
@@ -138,11 +138,11 @@ def login_page():
     st.sidebar.markdown("✉️ deslandes78@gmail.com")
     st.sidebar.markdown("[🌍 Visit our website](https://globalinternetsitepy-abh7v6tnmskxxnuplrdcgk.streamlit.app)")
 
-# ---------- LESSONS DATA (20 UNIQUE LESSONS) ----------
+# ---------- LESSONS DATA (20 UNIQUE LESSONS WITH UPDATED IMAGES) ----------
 lessons = [
     {
         "title": "Lesson 1: ChatGPT – Your AI Assistant",
-        "image": "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/e/ef/ChatGPT-Logo.svg",
         "text": "**What it does:** ChatGPT by OpenAI is a conversational AI that can answer questions, write code, create content, and more. It supports web browsing, code interpretation, and image generation (DALL-E).\n\n**Setup on Phone:** Download the official ChatGPT app from App Store or Google Play. Sign up with email or Google. Free tier available. For advanced features (GPT-4, plugins), subscribe to ChatGPT Plus ($20/month).\n\n**Setup on Computer:** Visit chat.openai.com. Create an account. Use directly in browser. Install the desktop app (Windows/Mac) for better voice input.",
         "read_aloud": "ChatGPT by OpenAI is a conversational AI that can answer questions, write code, create content, and more. Setup on phone: download the app. On computer: visit the website."
     },
@@ -154,7 +154,7 @@ lessons = [
     },
     {
         "title": "Lesson 3: DeepSeek – The Efficient Coder",
-        "image": "https://deepseek.com/favicon.ico",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/e/ec/DeepSeek_logo.svg",
         "text": "**What it does:** DeepSeek is a highly efficient coding and reasoning AI, known for low cost and long context (1 million tokens). Great for programming, math, and technical analysis.\n\n**Setup on Phone:** Use the DeepSeek mobile app (available on official stores) or access via browser at chat.deepseek.com.\n\n**Setup on Computer:** Go to chat.deepseek.com. No login required for basic use. Create account to save chats. Free and open-weight models available.",
         "read_aloud": "DeepSeek is an efficient coding and reasoning AI. Setup: use the mobile app or visit the website. Free to use."
     },
@@ -166,31 +166,31 @@ lessons = [
     },
     {
         "title": "Lesson 5: Claude – Safe & Ethical AI",
-        "image": "https://claude.ai/favicon.ico",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Claude_AI_logo.svg",
         "text": "**What it does:** Claude by Anthropic focuses on safety, honesty, and helpfulness. Excellent for long documents (100k+ tokens), analysis, and creative writing.\n\n**Setup on Phone:** Download Claude app from App Store (iOS) or use web browser on Android. Sign up with email.\n\n**Setup on Computer:** Visit claude.ai. Free tier available. Pro plan ($20/month) offers more usage and priority access.",
         "read_aloud": "Claude by Anthropic is safe and ethical. Good for long documents. Setup via app or website."
     },
     {
         "title": "Lesson 6: GitHub Copilot – AI Pair Programmer",
-        "image": "https://github.githubassets.com/favicons/favicon.svg",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/0/0a/GitHub_Copilot_%282025%29.svg",
         "text": "**What it does:** Copilot suggests code and entire functions in real‑time inside VS Code, JetBrains, and other IDEs. Supports many languages.\n\n**Setup on Phone:** No phone IDE currently. Use GitHub Codespaces on mobile browser with Copilot enabled.\n\n**Setup on Computer:** Install VS Code, install Copilot extension, sign in with GitHub account (free for verified students/teachers, $10/month otherwise).",
         "read_aloud": "GitHub Copilot is an AI pair programmer that suggests code inside your editor. Setup via VS Code extension."
     },
     {
         "title": "Lesson 7: Perplexity AI – Search + Answer",
-        "image": "https://perplexity.ai/favicon.ico",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Perplexity_AI_logo.svg",
         "text": "**What it does:** Perplexity is an AI‑powered search engine that gives direct answers with citations. Pro version can search academic papers, YouTube, and use multiple AI models.\n\n**Setup on Phone:** Install Perplexity app. Sign up with Google/Apple.\n\n**Setup on Computer:** Visit perplexity.ai. Free. Pro subscription ($20/month) unlocks more features.",
         "read_aloud": "Perplexity AI is an answer engine with citations. Setup via app or website."
     },
     {
         "title": "Lesson 8: Midjourney – AI Image Generator",
-        "image": "https://cdn.discordapp.com/icons/662267976984297473/83e3a1d11b5e8d1c8c9c6b1e4f3d7e8a.webp?size=96",
+        "image": "https://lobehub.com/icons/midjourney/avatar.svg",
         "text": "**What it does:** Midjourney generates stunning images from text prompts. Runs inside Discord. Known for artistic styles.\n\n**Setup on Phone:** Install Discord, join Midjourney server. Use /imagine command. Free trial limited, then subscription ($10–$120/month).\n\n**Setup on Computer:** Same – use Discord desktop app or web version.",
         "read_aloud": "Midjourney generates images from text prompts inside Discord. Requires subscription after trial."
     },
     {
         "title": "Lesson 9: DALL‑E 3 – OpenAI's Image Creator",
-        "image": "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/e/ef/ChatGPT-Logo.svg",
         "text": "**What it does:** DALL‑E 3 integrated into ChatGPT Plus generates highly accurate images from descriptions. Understands complex prompts.\n\n**Setup on Phone:** Use ChatGPT app (Plus subscription).\n\n**Setup on Computer:** chat.openai.com with Plus account. Describe an image and DALL‑E will create it.",
         "read_aloud": "DALL‑E 3 creates images from text inside ChatGPT Plus. Setup requires ChatGPT subscription."
     },
@@ -208,13 +208,13 @@ lessons = [
     },
     {
         "title": "Lesson 12: ElevenLabs – Voice Cloning & TTS",
-        "image": "https://elevenlabs.io/favicon.ico",
+        "image": "https://cdn.simpleicons.org/elevenlabs/000000",
         "text": "**What it does:** ElevenLabs creates realistic text‑to‑speech and voice cloning. Used for audiobooks, dubbing, and AI voiceovers.\n\n**Setup on Phone:** Use browser on phone, sign up at elevenlabs.io. No dedicated app yet.\n\n**Setup on Computer:** Visit elevenlabs.io. Free tier offers 10,000 characters/month. Paid plans start at $5/month.",
         "read_aloud": "ElevenLabs does realistic text‑to‑speech and voice cloning. Setup via website."
     },
     {
         "title": "Lesson 13: Stable Diffusion – Open Source Image Gen",
-        "image": "https://stability.ai/favicon.ico",
+        "image": "https://cdn.simpleicons.org/stabilityai/000000",
         "text": "**What it does:** Stable Diffusion by Stability AI generates images from text. Can run locally on your own GPU. Many community tools.\n\n**Setup on Phone:** Use free apps like 'DreamStudio' or web demos. For local, needs powerful phone.\n\n**Setup on Computer:** Install Automatic1111 WebUI or ComfyUI. Requires Python and GPU. Or use online free demos (Hugging Face).",
         "read_aloud": "Stable Diffusion is an open‑source image generator. Can run locally or use online demos."
     },
@@ -226,7 +226,7 @@ lessons = [
     },
     {
         "title": "Lesson 15: AutoGPT – Autonomous AI Agents",
-        "image": "https://github.com/fluidicon.png",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/8/80/Auto_GPT_Logo.png",
         "text": "**What it does:** AutoGPT is an experimental open‑source agent that can chain LLM calls to achieve goals (e.g., research, code, browse web) autonomously.\n\n**Setup on Phone:** Not recommended. Requires Python and API keys.\n\n**Setup on Computer:** Clone GitHub repo, install Python, get OpenAI API key, run in terminal. Or use web versions (AgentGPT).",
         "read_aloud": "AutoGPT autonomously completes multi‑step tasks. Setup requires Python and API keys."
     },
@@ -238,7 +238,7 @@ lessons = [
     },
     {
         "title": "Lesson 17: LangChain – Build LLM Apps",
-        "image": "https://python.langchain.com/favicon.ico",
+        "image": "https://cdn.simpleicons.org/langchain/000000",
         "text": "**What it does:** LangChain is a framework for building applications powered by LLMs – chains, agents, retrieval, memory.\n\n**Setup on Phone:** Not for mobile. Use Replit or GitHub Codespaces on mobile browser.\n\n**Setup on Computer:** Install with pip install langchain. Then integrate with OpenAI, Hugging Face, etc. Great for developers.",
         "read_aloud": "LangChain is a Python framework to build LLM applications. Setup via pip."
     },
@@ -250,7 +250,7 @@ lessons = [
     },
     {
         "title": "Lesson 19: OpenAssistant – Community LLM",
-        "image": "https://open-assistant.io/favicon.ico",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/3/33/OpenAssistant_logo.svg",
         "text": "**What it does:** OpenAssistant is a free, open‑source chatbot trained by volunteers. Can be run locally or via demo.\n\n**Setup on Phone:** Use browser demo at open-assistant.io.\n\n**Setup on Computer:** Visit open-assistant.io/chat. No login required. For self‑hosting, follow GitHub instructions.",
         "read_aloud": "OpenAssistant is a free community‑built chatbot. Use online demo or self‑host."
     },
@@ -262,16 +262,16 @@ lessons = [
     }
 ]
 
-# ---------- MAIN PAGE (AFTER LOGIN) ----------
+# ---------- MAIN PAGE ----------
 def main_page():
-    # Sidebar with company info
+    # Sidebar branding and logout
     st.sidebar.markdown("## 🌐 GlobalInternet.py")
     st.sidebar.markdown("---")
     st.sidebar.markdown("### 👨‍💻 Gesner Deslandes")
     st.sidebar.markdown("📞 (509) 4738-5663")
     st.sidebar.markdown("✉️ deslandes78@gmail.com")
     st.sidebar.markdown("---")
-    st.sidebar.markdown("[🌍 Visit GlobalInternet.py](https://globalinternetsitepy-abh7v6tnmskxxnuplrdcgk.streamlit.app)")
+    st.sidebar.markdown("[🌍 Visit our website](https://globalinternetsitepy-abh7v6tnmskxxnuplrdcgk.streamlit.app)")
     st.sidebar.markdown("---")
     if st.sidebar.button("🚪 Logout"):
         st.session_state.authenticated = False
@@ -280,7 +280,7 @@ def main_page():
     # Main header
     st.markdown('<div class="main-header"><h1>📘 Let\'s Learn AI with Gesner</h1><p>20 Lessons – Master the best AI tools step by step</p></div>', unsafe_allow_html=True)
     
-    # Display lessons
+    # Display lessons with image, text, and read-aloud button
     for idx, lesson in enumerate(lessons, 1):
         with st.container():
             st.markdown(f'<div class="lesson-card">', unsafe_allow_html=True)
@@ -290,7 +290,6 @@ def main_page():
             with col_text:
                 st.markdown(f"## {lesson['title']}")
                 st.markdown(lesson["text"])
-                # Read Aloud button
                 read_btn = st.button(f"🔊 Read Aloud (Lesson {idx})", key=f"read_{idx}")
                 if read_btn:
                     text_to_speak = lesson["read_aloud"].replace('"', '\\"').replace("\n", " ")
@@ -314,7 +313,7 @@ def main_page():
     </div>
     """, unsafe_allow_html=True)
 
-# ---------- ROUTING ----------
+# ---------- PAGE ROUTING ----------
 if not st.session_state.authenticated:
     login_page()
 else:
