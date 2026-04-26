@@ -23,24 +23,35 @@ st.markdown("""
         text-align: center;
         color: white;
     }
-    .ai-icon-grid {
+    .top-square {
+        background: rgba(255,255,255,0.2);
+        border-radius: 20px;
+        padding: 1rem;
+        margin-bottom: 2rem;
         display: flex;
-        flex-wrap: wrap;
         justify-content: center;
         gap: 20px;
-        margin: 30px 0;
+        flex-wrap: wrap;
     }
-    .ai-icon {
+    .top-square img {
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
         background: white;
-        border-radius: 20px;
-        padding: 10px;
-        width: 80px;
-        text-align: center;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        transition: transform 0.3s;
+        border-radius: 15px;
+        padding: 8px;
     }
-    .ai-icon:hover { transform: scale(1.05); }
-    .ai-icon img { width: 50px; height: 50px; object-fit: contain; }
+    .ai-list {
+        background: rgba(0,0,0,0.3);
+        border-radius: 15px;
+        padding: 1rem;
+        text-align: left;
+        margin-top: 1rem;
+    }
+    .ai-list p {
+        margin: 5px 0;
+        font-size: 1rem;
+    }
     .main-header {
         background: linear-gradient(90deg, #4facfe, #00f2fe);
         padding: 1rem;
@@ -71,34 +82,33 @@ st.markdown("""
 def login_page():
     st.markdown('<div class="login-container">', unsafe_allow_html=True)
     st.markdown("<h1>🤖 Let's Learn AI with Gesner</h1>", unsafe_allow_html=True)
-    st.markdown("<p>Master ChatGPT, Gemini, DeepSeek, Grok & more – 20 interactive lessons</p>", unsafe_allow_html=True)
+    st.markdown("<p>20 lessons to master the best AI tools</p>", unsafe_allow_html=True)
     
-    # All 20 AI logos (using reliable official or public images)
-    ai_logos = [
-        "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg",          # ChatGPT
-        "https://www.gstatic.com/lamda/images/gemini_favicon_197x197_2ef9878c.png",      # Gemini
-        "https://deepseek.com/favicon.ico",                                              # DeepSeek
-        "https://abs.twimg.com/responsive-web/client-web/icon-ios.77d25eba.png",        # Grok (X)
-        "https://claude.ai/favicon.ico",                                                  # Claude
-        "https://github.githubassets.com/favicons/favicon.svg",                           # GitHub Copilot
-        "https://perplexity.ai/favicon.ico",                                              # Perplexity
-        "https://cdn.discordapp.com/icons/662267976984297473/83e3a1d11b5e8d1c8c9c6b1e4f3d7e8a.webp?size=96", # Midjourney (Discord logo)
-        "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg",          # DALL‑E (same as ChatGPT)
-        "https://leonardo.ai/favicon.ico",                                                # Leonardo.ai
-        "https://runwayml.com/favicon.ico",                                               # Runway ML
-        "https://elevenlabs.io/favicon.ico",                                              # ElevenLabs
-        "https://stability.ai/favicon.ico",                                               # Stable Diffusion
-        "https://huggingface.co/favicon.ico",                                             # Hugging Face
-        "https://github.com/fluidicon.png",                                               # AutoGPT
-        "https://agentgpt.com/favicon.ico",                                               # AgentGPT
-        "https://python.langchain.com/favicon.ico",                                       # LangChain
-        "https://www.llamaindex.ai/favicon.ico",                                          # LlamaIndex
-        "https://open-assistant.io/favicon.ico",                                          # OpenAssistant
-        "https://poe.com/favicon.ico"                                                     # Poe
+    # Top square with only working AI symbols
+    working_icons = [
+        "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg",
+        "https://www.gstatic.com/lamda/images/gemini_favicon_197x197_2ef9878c.png",
+        "https://claude.ai/favicon.ico",
+        "https://github.githubassets.com/favicons/favicon.svg",
+        "https://perplexity.ai/favicon.ico"
     ]
-    st.markdown('<div class="ai-icon-grid">', unsafe_allow_html=True)
-    for logo in ai_logos:
-        st.markdown(f'<div class="ai-icon"><img src="{logo}"><br><small>AI</small></div>', unsafe_allow_html=True)
+    st.markdown('<div class="top-square">', unsafe_allow_html=True)
+    for icon in working_icons:
+        st.markdown(f'<img src="{icon}">', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
+    
+    # List of all 20 AI tools with lesson numbers
+    ai_tools = [
+        "1. ChatGPT", "2. Google Gemini", "3. DeepSeek", "4. Grok", "5. Claude",
+        "6. GitHub Copilot", "7. Perplexity AI", "8. Midjourney", "9. DALL‑E 3", "10. Leonardo.ai",
+        "11. Runway ML", "12. ElevenLabs", "13. Stable Diffusion", "14. Hugging Face", "15. AutoGPT",
+        "16. AgentGPT", "17. LangChain", "18. LlamaIndex", "19. OpenAssistant", "20. Poe"
+    ]
+    st.markdown('<div class="ai-list"><h3>📚 What you will learn:</h3>', unsafe_allow_html=True)
+    cols = st.columns(2)
+    for i, tool in enumerate(ai_tools):
+        with cols[i % 2]:
+            st.markdown(f"✅ {tool}")
     st.markdown('</div>', unsafe_allow_html=True)
     
     with st.form("login_form"):
