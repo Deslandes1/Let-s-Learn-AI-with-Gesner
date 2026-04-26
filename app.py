@@ -49,6 +49,7 @@ st.markdown("""
         margin-bottom: 2rem;
         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         transition: transform 0.2s;
+        scroll-margin-top: 80px;
     }
     .lesson-card:hover { transform: translateY(-5px); }
     .footer {
@@ -103,8 +104,6 @@ def login_page():
     st.sidebar.markdown("[🌍 Visit our website](https://globalinternetsitepy-abh7v6tnmskxxnuplrdcgk.streamlit.app)")
 
 # ---------- LESSONS DATA ----------
-# For lessons 2,8,10,11,13,16,19 we set 'no_image' = True to hide the broken logo
-# and we modify the title to include the AI name on the left.
 lessons = [
     {
         "title": "Lesson 1: ChatGPT – Your AI Assistant",
@@ -115,7 +114,7 @@ lessons = [
     },
     {
         "title": "Google Gemini – Lesson 2: Google Gemini – Multimodal Power",
-        "image": "",  # broken image - will not show
+        "image": "",
         "text": "**What it does:** Gemini (formerly Bard) is Google's most advanced AI. It understands text, images, audio, and video. Integrated with Google Workspace (Gmail, Docs, Drive).\n\n**Setup on Phone:** Install Google Gemini app (Android) or use Google app on iOS with Gemini enabled. Sign in with Google account.\n\n**Setup on Computer:** Visit gemini.google.com. Sign in. Use directly. For advanced features, subscribe to Gemini Advanced (part of Google One AI Premium).",
         "read_aloud": "Google Gemini is Google's most advanced AI. It understands text, images, audio, and video. Setup: use the app on phone or visit the website on computer.",
         "no_image": True
@@ -261,18 +260,44 @@ def main_page():
     if st.sidebar.button("🚪 Logout"):
         st.session_state.authenticated = False
         st.rerun()
-    
+
+    # ----- Lesson selector in sidebar -----
+    lesson_titles = [f"{i+1}. {lesson['title'][:50]}" for i, lesson in enumerate(lessons)]
+    selected_lesson_idx = st.sidebar.selectbox(
+        "📖 Jump to Lesson",
+        options=range(len(lessons)),
+        format_func=lambda i: lesson_titles[i],
+        index=0
+    )
+    # Generate anchor links for each lesson
+    st.markdown("""
+    <style>
+        .lesson-anchor {
+            scroll-margin-top: 70px;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+    # Scroll to selected lesson using JavaScript
+    if selected_lesson_idx is not None:
+        st.components.v1.html(f"""
+        <script>
+            var element = document.getElementById('lesson-{selected_lesson_idx}');
+            if(element) {{
+                element.scrollIntoView({{behavior: 'smooth', block: 'start'}});
+            }}
+        </script>
+        """, height=0)
+
     st.markdown('<div class="main-header"><h1>📘 Let\'s Learn AI with Gesner</h1><p>20 Lessons – Master the best AI tools step by step</p></div>', unsafe_allow_html=True)
     
-    for idx, lesson in enumerate(lessons, 1):
+    # Display lessons with unique anchor IDs
+    for idx, lesson in enumerate(lessons):
         with st.container():
-            st.markdown(f'<div class="lesson-card">', unsafe_allow_html=True)
-            
+            st.markdown(f'<div class="lesson-card" id="lesson-{idx}">', unsafe_allow_html=True)
             if lesson.get("no_image", False):
-                # No image – use full width for text
                 st.markdown(f"## {lesson['title']}")
                 st.markdown(lesson["text"])
-                read_btn = st.button(f"🔊 Read Aloud (Lesson {idx})", key=f"read_{idx}")
+                read_btn = st.button(f"🔊 Read Aloud (Lesson {idx+1})", key=f"read_{idx}")
                 if read_btn:
                     text_to_speak = lesson["read_aloud"].replace('"', '\\"').replace("\n", " ")
                     js_code = f"""
@@ -286,7 +311,6 @@ def main_page():
                     st.components.v1.html(js_code, height=0)
                     st.success("🔊 Now reading aloud... (make sure your device volume is on)")
             else:
-                # Original layout with image on left
                 col_img, col_text = st.columns([1, 3])
                 with col_img:
                     if lesson["image"]:
@@ -294,7 +318,7 @@ def main_page():
                 with col_text:
                     st.markdown(f"## {lesson['title']}")
                     st.markdown(lesson["text"])
-                    read_btn = st.button(f"🔊 Read Aloud (Lesson {idx})", key=f"read_{idx}")
+                    read_btn = st.button(f"🔊 Read Aloud (Lesson {idx+1})", key=f"read_{idx}")
                     if read_btn:
                         text_to_speak = lesson["read_aloud"].replace('"', '\\"').replace("\n", " ")
                         js_code = f"""
