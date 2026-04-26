@@ -275,7 +275,7 @@ def main_page():
                 read_btn = st.button(f"🔊 Read Aloud (Lesson {idx})", key=f"read_{idx}")
                 if read_btn:
                     text_to_speak = lesson["read_aloud"].replace('"', '\\"').replace("\n", " ")
-                    html_code = f"""
+                    js_code = f"""
                     <script>
                         var utterance = new SpeechSynthesisUtterance("{text_to_speak}");
                         utterance.lang = "en-US";
@@ -283,7 +283,7 @@ def main_page():
                         window.speechSynthesis.speak(utterance);
                     </script>
                     """
-                    st.iframe(f"data:text/html,<script>{html_code}</script>", height=0, width=0)
+                    st.components.v1.html(js_code, height=0)
                     st.success("🔊 Now reading aloud... (make sure your device volume is on)")
             else:
                 # Original layout with image on left
@@ -297,7 +297,7 @@ def main_page():
                     read_btn = st.button(f"🔊 Read Aloud (Lesson {idx})", key=f"read_{idx}")
                     if read_btn:
                         text_to_speak = lesson["read_aloud"].replace('"', '\\"').replace("\n", " ")
-                        html_code = f"""
+                        js_code = f"""
                         <script>
                             var utterance = new SpeechSynthesisUtterance("{text_to_speak}");
                             utterance.lang = "en-US";
@@ -305,7 +305,7 @@ def main_page():
                             window.speechSynthesis.speak(utterance);
                         </script>
                         """
-                        st.iframe(f"data:text/html,<script>{html_code}</script>", height=0, width=0)
+                        st.components.v1.html(js_code, height=0)
                         st.success("🔊 Now reading aloud... (make sure your device volume is on)")
             st.markdown('</div>', unsafe_allow_html=True)
     
