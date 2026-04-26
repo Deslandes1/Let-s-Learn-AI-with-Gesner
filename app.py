@@ -109,7 +109,6 @@ def login_page():
     st.sidebar.markdown("[🌍 Visit our website](https://globalinternetsitepy-abh7v6tnmskxxnuplrdcgk.streamlit.app)")
 
 # ---------- LESSONS DATA ----------
-# Each lesson has: title, image, text, read_aloud, and optionally an ai_name (for those we want to display separately)
 lessons = [
     {
         "title": "Lesson 1: ChatGPT – Your AI Assistant",
