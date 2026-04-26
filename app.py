@@ -18,39 +18,43 @@ st.markdown("""
 <style>
     .login-container {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 2rem;
+        padding: 1.5rem;
         border-radius: 20px;
         text-align: center;
         color: white;
     }
     .top-square {
         background: rgba(255,255,255,0.2);
-        border-radius: 20px;
-        padding: 1rem;
-        margin-bottom: 2rem;
+        border-radius: 15px;
+        padding: 0.5rem;
+        margin-bottom: 1rem;
         display: flex;
         justify-content: center;
-        gap: 20px;
+        gap: 15px;
         flex-wrap: wrap;
     }
     .top-square img {
-        width: 60px;
-        height: 60px;
+        width: 40px;
+        height: 40px;
         object-fit: contain;
         background: white;
-        border-radius: 15px;
-        padding: 8px;
+        border-radius: 10px;
+        padding: 5px;
     }
     .ai-list {
         background: rgba(0,0,0,0.3);
         border-radius: 15px;
-        padding: 1rem;
+        padding: 0.8rem;
         text-align: left;
-        margin-top: 1rem;
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+    }
+    .ai-list h3 {
+        margin-top: 0;
+        font-size: 1.2rem;
     }
     .ai-list p {
-        margin: 5px 0;
-        font-size: 1rem;
+        margin: 3px 0;
     }
     .main-header {
         background: linear-gradient(90deg, #4facfe, #00f2fe);
@@ -75,29 +79,31 @@ st.markdown("""
         background-color: #f1f1f1;
         border-radius: 20px;
     }
+    /* Make columns tighter for the list */
+    .stColumn {
+        padding: 0 !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
 # ---------- LOGIN PAGE ----------
 def login_page():
     st.markdown('<div class="login-container">', unsafe_allow_html=True)
-    st.markdown("<h1>🤖 Let's Learn AI with Gesner</h1>", unsafe_allow_html=True)
-    st.markdown("<p>20 lessons to master the best AI tools</p>", unsafe_allow_html=True)
+    st.markdown("<h2>🤖 Let's Learn AI with Gesner</h2>", unsafe_allow_html=True)
+    st.markdown("<p style='font-size:0.9rem;'>20 lessons to master the best AI tools</p>", unsafe_allow_html=True)
     
-    # Top square with only working AI symbols
+    # Top square: only Gemini (small) plus maybe Claude and Perplexity (all small)
     working_icons = [
-        "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg",
-        "https://www.gstatic.com/lamda/images/gemini_favicon_197x197_2ef9878c.png",
-        "https://claude.ai/favicon.ico",
-        "https://github.githubassets.com/favicons/favicon.svg",
-        "https://perplexity.ai/favicon.ico"
+        "https://www.gstatic.com/lamda/images/gemini_favicon_197x197_2ef9878c.png",  # Gemini
+        "https://claude.ai/favicon.ico",                                              # Claude
+        "https://perplexity.ai/favicon.ico"                                           # Perplexity
     ]
     st.markdown('<div class="top-square">', unsafe_allow_html=True)
     for icon in working_icons:
         st.markdown(f'<img src="{icon}">', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
     
-    # List of all 20 AI tools with lesson numbers
+    # List of all 20 AI tools with lesson numbers (compact)
     ai_tools = [
         "1. ChatGPT", "2. Google Gemini", "3. DeepSeek", "4. Grok", "5. Claude",
         "6. GitHub Copilot", "7. Perplexity AI", "8. Midjourney", "9. DALL‑E 3", "10. Leonardo.ai",
@@ -105,10 +111,13 @@ def login_page():
         "16. AgentGPT", "17. LangChain", "18. LlamaIndex", "19. OpenAssistant", "20. Poe"
     ]
     st.markdown('<div class="ai-list"><h3>📚 What you will learn:</h3>', unsafe_allow_html=True)
-    cols = st.columns(2)
+    # Use two columns for compact display
+    col1, col2 = st.columns(2)
     for i, tool in enumerate(ai_tools):
-        with cols[i % 2]:
-            st.markdown(f"✅ {tool}")
+        if i % 2 == 0:
+            col1.markdown(f"✅ {tool}")
+        else:
+            col2.markdown(f"✅ {tool}")
     st.markdown('</div>', unsafe_allow_html=True)
     
     with st.form("login_form"):
@@ -129,7 +138,7 @@ def login_page():
     st.sidebar.markdown("✉️ deslandes78@gmail.com")
     st.sidebar.markdown("[🌍 Visit our website](https://globalinternetsitepy-abh7v6tnmskxxnuplrdcgk.streamlit.app)")
 
-# ---------- LESSONS DATA (20 UNIQUE LESSONS WITH PROPER LOGOS) ----------
+# ---------- LESSONS DATA (20 UNIQUE LESSONS) ----------
 lessons = [
     {
         "title": "Lesson 1: ChatGPT – Your AI Assistant",
@@ -277,11 +286,11 @@ def main_page():
             st.markdown(f'<div class="lesson-card">', unsafe_allow_html=True)
             col_img, col_text = st.columns([1, 3])
             with col_img:
-                st.image(lesson["image"], width=100)
+                st.image(lesson["image"], width=80)
             with col_text:
                 st.markdown(f"## {lesson['title']}")
                 st.markdown(lesson["text"])
-                # Read Aloud button with JavaScript SpeechSynthesis
+                # Read Aloud button
                 read_btn = st.button(f"🔊 Read Aloud (Lesson {idx})", key=f"read_{idx}")
                 if read_btn:
                     text_to_speak = lesson["read_aloud"].replace('"', '\\"').replace("\n", " ")
