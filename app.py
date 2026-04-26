@@ -73,7 +73,7 @@ def login_page():
     st.markdown("<h2>🤖 Let's Learn AI with Gesner</h2>", unsafe_allow_html=True)
     st.markdown("<p style='font-size:0.9rem;'>20 lessons to master the best AI tools</p>", unsafe_allow_html=True)
     
-    # List of all 20 AI names (no symbols)
+    # List of all 20 AI names (plain text, no symbols)
     ai_names = [
         "ChatGPT", "Google Gemini", "DeepSeek", "Grok", "Claude",
         "GitHub Copilot", "Perplexity AI", "Midjourney", "DALL‑E 3", "Leonardo.ai",
@@ -81,7 +81,6 @@ def login_page():
         "AgentGPT", "LangChain", "LlamaIndex", "OpenAssistant", "Poe"
     ]
     st.markdown('<div class="ai-list"><h3>📚 What you will learn:</h3>', unsafe_allow_html=True)
-    # Two columns for compact display
     col1, col2 = st.columns(2)
     for i, name in enumerate(ai_names):
         if i % 2 == 0:
@@ -90,7 +89,6 @@ def login_page():
             col2.markdown(f"✅ {name}")
     st.markdown('</div>', unsafe_allow_html=True)
     
-    # Password login form
     with st.form("login_form"):
         password = st.text_input("🔐 Enter Password", type="password", placeholder="Password: 20082010")
         if st.form_submit_button("✨ Unlock Lessons ✨"):
@@ -101,7 +99,6 @@ def login_page():
                 st.error("Incorrect password.")
     st.markdown("</div>", unsafe_allow_html=True)
     
-    # Sidebar on login page
     st.sidebar.markdown("---")
     st.sidebar.markdown("### 🌐 GlobalInternet.py")
     st.sidebar.markdown("**Gesner Deslandes** – Founder & Python Builder")
@@ -109,7 +106,7 @@ def login_page():
     st.sidebar.markdown("✉️ deslandes78@gmail.com")
     st.sidebar.markdown("[🌍 Visit our website](https://globalinternetsitepy-abh7v6tnmskxxnuplrdcgk.streamlit.app)")
 
-# ---------- LESSONS DATA (UPDATED WITH NAMES PREFIXED FOR SPECIFIC LESSONS) ----------
+# ---------- LESSONS DATA (WITH PLAIN NAMES FOR SPECIFIED LESSONS) ----------
 lessons = [
     {
         "title": "Lesson 1: ChatGPT – Your AI Assistant",
@@ -168,13 +165,13 @@ lessons = [
     {
         "title": "Lesson 10: Leonardo.ai – Free Image Generation",
         "image": "https://leonardo.ai/favicon.ico",
-        "text": "**Leonardo.ai:** **What it does:** Leonardo is a free (daily tokens) image and video generation platform. Many models, fine‑tuning, and canvas editor.\n\n**Setup on Phone:** Use browser on phone, sign up at leonardo.ai.\n\n**Setup on Computer:** Visit leonardo.ai, create account. Free tier gives 150 tokens/day.",
+        "text": "Leonardo.ai: What it does: Leonardo is a free (daily tokens) image and video generation platform. Many models, fine‑tuning, and canvas editor.\n\nSetup on Phone: Use browser on phone, sign up at leonardo.ai.\n\nSetup on Computer: Visit leonardo.ai, create account. Free tier gives 150 tokens/day.",
         "read_aloud": "Leonardo.ai is a free image generation platform. Setup via website. 150 free tokens daily."
     },
     {
         "title": "Lesson 11: Runway ML – AI Video Editor",
         "image": "https://runwayml.com/favicon.ico",
-        "text": "**Runway ML:** **What it does:** Runway provides AI tools for video editing, green screen removal, text‑to‑video, and motion tracking. Used by filmmakers.\n\n**Setup on Phone:** Runway app for iOS. Sign up.\n\n**Setup on Computer:** Visit runwayml.com. Free tier with limited exports; paid plans start at $12/month.",
+        "text": "Runway ML: What it does: Runway provides AI tools for video editing, green screen removal, text‑to‑video, and motion tracking. Used by filmmakers.\n\nSetup on Phone: Runway app for iOS. Sign up.\n\nSetup on Computer: Visit runwayml.com. Free tier with limited exports; paid plans start at $12/month.",
         "read_aloud": "Runway ML is an AI video editor. Setup via app or website."
     },
     {
@@ -186,7 +183,7 @@ lessons = [
     {
         "title": "Lesson 13: Stable Diffusion – Open Source Image Gen",
         "image": "https://cdn.simpleicons.org/stabilityai/000000",
-        "text": "**Stable Diffusion:** **What it does:** Stable Diffusion by Stability AI generates images from text. Can run locally on your own GPU. Many community tools.\n\n**Setup on Phone:** Use free apps like 'DreamStudio' or web demos. For local, needs powerful phone.\n\n**Setup on Computer:** Install Automatic1111 WebUI or ComfyUI. Requires Python and GPU. Or use online free demos (Hugging Face).",
+        "text": "Stable Diffusion: What it does: Stable Diffusion by Stability AI generates images from text. Can run locally on your own GPU. Many community tools.\n\nSetup on Phone: Use free apps like 'DreamStudio' or web demos. For local, needs powerful phone.\n\nSetup on Computer: Install Automatic1111 WebUI or ComfyUI. Requires Python and GPU. Or use online free demos (Hugging Face).",
         "read_aloud": "Stable Diffusion is an open‑source image generator. Can run locally or use online demos."
     },
     {
@@ -204,7 +201,7 @@ lessons = [
     {
         "title": "Lesson 16: AgentGPT – Browser Agent",
         "image": "https://agentgpt.com/favicon.ico",
-        "text": "**AgentGPT:** **What it does:** AgentGPT is a browser‑based AutoGPT alternative. Define a goal, and it will attempt to achieve it using LLM.\n\n**Setup on Phone:** Use browser on phone, go to agentgpt.com. Requires API key for some features.\n\n**Setup on Computer:** agentgpt.com – sign in, provide OpenAI API key, start an agent. Easy web interface.",
+        "text": "AgentGPT: What it does: AgentGPT is a browser‑based AutoGPT alternative. Define a goal, and it will attempt to achieve it using LLM.\n\nSetup on Phone: Use browser on phone, go to agentgpt.com. Requires API key for some features.\n\nSetup on Computer: agentgpt.com – sign in, provide OpenAI API key, start an agent. Easy web interface.",
         "read_aloud": "AgentGPT runs autonomous agents in your browser. Setup via website with API key."
     },
     {
@@ -222,7 +219,7 @@ lessons = [
     {
         "title": "Lesson 19: OpenAssistant – Community LLM",
         "image": "https://upload.wikimedia.org/wikipedia/commons/3/33/OpenAssistant_logo.svg",
-        "text": "**OpenAssistant:** **What it does:** OpenAssistant is a free, open‑source chatbot trained by volunteers. Can be run locally or via demo.\n\n**Setup on Phone:** Use browser demo at open-assistant.io.\n\n**Setup on Computer:** Visit open-assistant.io/chat. No login required. For self‑hosting, follow GitHub instructions.",
+        "text": "OpenAssistant: What it does: OpenAssistant is a free, open‑source chatbot trained by volunteers. Can be run locally or via demo.\n\nSetup on Phone: Use browser demo at open-assistant.io.\n\nSetup on Computer: Visit open-assistant.io/chat. No login required. For self‑hosting, follow GitHub instructions.",
         "read_aloud": "OpenAssistant is a free community‑built chatbot. Use online demo or self‑host."
     },
     {
@@ -235,7 +232,6 @@ lessons = [
 
 # ---------- MAIN PAGE ----------
 def main_page():
-    # Sidebar branding and logout
     st.sidebar.markdown("## 🌐 GlobalInternet.py")
     st.sidebar.markdown("---")
     st.sidebar.markdown("### 👨‍💻 Gesner Deslandes")
@@ -248,10 +244,8 @@ def main_page():
         st.session_state.authenticated = False
         st.rerun()
     
-    # Main header
     st.markdown('<div class="main-header"><h1>📘 Let\'s Learn AI with Gesner</h1><p>20 Lessons – Master the best AI tools step by step</p></div>', unsafe_allow_html=True)
     
-    # Display lessons
     for idx, lesson in enumerate(lessons, 1):
         with st.container():
             st.markdown(f'<div class="lesson-card">', unsafe_allow_html=True)
@@ -276,7 +270,6 @@ def main_page():
                     st.success("🔊 Now reading aloud... (make sure your device volume is on)")
             st.markdown('</div>', unsafe_allow_html=True)
     
-    # Footer
     st.markdown(f"""
     <div class="footer">
         <p>© {datetime.now().year} GlobalInternet.py – Built by Gesner Deslandes</p>
