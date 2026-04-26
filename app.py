@@ -13,7 +13,7 @@ st.set_page_config(
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
-# ---------- CUSTOM CSS FOR COLORFUL LOGIN AND BUTTONS ----------
+# ---------- CUSTOM CSS ----------
 st.markdown("""
 <style>
     .login-container {
@@ -57,16 +57,6 @@ st.markdown("""
         transition: transform 0.2s;
     }
     .lesson-card:hover { transform: translateY(-5px); }
-    .read-aloud {
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 30px;
-        padding: 0.3rem 1rem;
-        cursor: pointer;
-        font-weight: bold;
-        margin-top: 1rem;
-    }
     .footer {
         text-align: center;
         margin-top: 3rem;
@@ -83,20 +73,24 @@ def login_page():
     st.markdown("<h1>🤖 Let's Learn AI with Gesner</h1>", unsafe_allow_html=True)
     st.markdown("<p>Master ChatGPT, Gemini, DeepSeek, Grok & more – 20 interactive lessons</p>", unsafe_allow_html=True)
     
-    # Grouped AI icons
-    ai_logos = [
+    # Fixed AI icon URLs – all working
+    ai_icons = [
         "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Google_Gemini_logo.svg/1024px-Google_Gemini_logo.svg.png",
-        "https://deepseek.com/favicon.ico",  # placeholder
-        "https://x.ai/favicon.ico",  # Grok placeholder
-        "https://www.claude.com/favicon.ico",
+        "https://cdn.simpleicons.org/googlecloud/4285F4",  # Gemini placeholder
+        "https://deepseek.com/favicon.ico",
+        "https://x.ai/favicon.ico",
+        "https://claude.ai/favicon.ico",
         "https://github.githubassets.com/favicons/favicon.svg",
-        "https://www.perplexity.ai/favicon.ico",
-        "https://www.midjourney.com/favicon.ico"
+        "https://perplexity.ai/favicon.ico",
+        "https://midjourney.com/favicon.ico",
+        "https://huggingface.co/favicon.ico",
+        "https://stability.ai/favicon.ico",
+        "https://runwayml.com/favicon.ico",
+        "https://elevenlabs.io/favicon.ico"
     ]
     st.markdown('<div class="ai-icon-grid">', unsafe_allow_html=True)
-    for logo in ai_logos:
-        st.markdown(f'<div class="ai-icon"><img src="{logo}"><br><small>AI</small></div>', unsafe_allow_html=True)
+    for icon in ai_icons:
+        st.markdown(f'<div class="ai-icon"><img src="{icon}"><br><small>AI</small></div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
     
     with st.form("login_form"):
@@ -109,7 +103,7 @@ def login_page():
                 st.error("Incorrect password. Hint: 20082010")
     st.markdown("</div>", unsafe_allow_html=True)
     
-    # Sidebar visible on login page too
+    # Sidebar on login page
     st.sidebar.markdown("---")
     st.sidebar.markdown("### 🌐 GlobalInternet.py")
     st.sidebar.markdown("**Gesner Deslandes** – Founder & Python Builder")
@@ -117,7 +111,7 @@ def login_page():
     st.sidebar.markdown("✉️ deslandes78@gmail.com")
     st.sidebar.markdown("[🌍 Visit our website](https://globalinternetsitepy-abh7v6tnmskxxnuplrdcgk.streamlit.app)")
 
-# ---------- LESSONS DATA (20 unique lessons) ----------
+# ---------- LESSONS DATA (20 UNIQUE LESSONS) WITH FIXED IMAGES ----------
 lessons = [
     {
         "title": "Lesson 1: ChatGPT – Your AI Assistant",
@@ -127,7 +121,7 @@ lessons = [
     },
     {
         "title": "Lesson 2: Google Gemini – Multimodal Power",
-        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Google_Gemini_logo.svg/1024px-Google_Gemini_logo.svg.png",
+        "image": "https://cdn.simpleicons.org/googlechat/0F9D58",
         "text": "**What it does:** Gemini (formerly Bard) is Google's most advanced AI. It understands text, images, audio, and video. Integrated with Google Workspace (Gmail, Docs, Drive).\n\n**Setup on Phone:** Install Google Gemini app (Android) or use Google app on iOS with Gemini enabled. Sign in with Google account.\n\n**Setup on Computer:** Visit gemini.google.com. Sign in. Use directly. For advanced features, subscribe to Gemini Advanced (part of Google One AI Premium).",
         "read_aloud": "Google Gemini is Google's most advanced AI. It understands text, images, audio, and video. Setup: use the app on phone or visit the website on computer."
     },
@@ -139,13 +133,13 @@ lessons = [
     },
     {
         "title": "Lesson 4: Grok – Witty & Real‑time",
-        "image": "https://x.ai/favicon.ico",
+        "image": "https://abs.twimg.com/responsive-web/client-web/icon-ios.77d25eba.png",
         "text": "**What it does:** Grok by xAI (Elon Musk) is designed to be witty, rebellious, and access real‑time X (Twitter) data. It can answer current events with attitude.\n\n**Setup on Phone:** Download the X app (Twitter). Grok is available to X Premium+ subscribers. No standalone app yet.\n\n**Setup on Computer:** Visit x.com, subscribe to Premium+, then access Grok from the sidebar. Real‑time web and X integration.",
         "read_aloud": "Grok by xAI is witty and accesses real‑time X data. Setup requires X Premium+ subscription."
     },
     {
         "title": "Lesson 5: Claude – Safe & Ethical AI",
-        "image": "https://www.claude.com/favicon.ico",
+        "image": "https://claude.ai/favicon.ico",
         "text": "**What it does:** Claude by Anthropic focuses on safety, honesty, and helpfulness. Excellent for long documents (100k+ tokens), analysis, and creative writing.\n\n**Setup on Phone:** Download Claude app from App Store (iOS) or use web browser on Android. Sign up with email.\n\n**Setup on Computer:** Visit claude.ai. Free tier available. Pro plan ($20/month) offers more usage and priority access.",
         "read_aloud": "Claude by Anthropic is safe and ethical. Good for long documents. Setup via app or website."
     },
@@ -157,13 +151,13 @@ lessons = [
     },
     {
         "title": "Lesson 7: Perplexity AI – Search + Answer",
-        "image": "https://www.perplexity.ai/favicon.ico",
+        "image": "https://perplexity.ai/favicon.ico",
         "text": "**What it does:** Perplexity is an AI‑powered search engine that gives direct answers with citations. Pro version can search academic papers, YouTube, and use multiple AI models.\n\n**Setup on Phone:** Install Perplexity app. Sign up with Google/Apple.\n\n**Setup on Computer:** Visit perplexity.ai. Free. Pro subscription ($20/month) unlocks more features.",
         "read_aloud": "Perplexity AI is an answer engine with citations. Setup via app or website."
     },
     {
         "title": "Lesson 8: Midjourney – AI Image Generator",
-        "image": "https://www.midjourney.com/favicon.ico",
+        "image": "https://midjourney.com/favicon.ico",
         "text": "**What it does:** Midjourney generates stunning images from text prompts. Runs inside Discord. Known for artistic styles.\n\n**Setup on Phone:** Install Discord, join Midjourney server. Use /imagine command. Free trial limited, then subscription ($10–$120/month).\n\n**Setup on Computer:** Same – use Discord desktop app or web version.",
         "read_aloud": "Midjourney generates images from text prompts inside Discord. Requires subscription after trial."
     },
@@ -259,7 +253,7 @@ def main_page():
     # Main header
     st.markdown('<div class="main-header"><h1>📘 Let\'s Learn AI with Gesner</h1><p>20 Lessons – Master the best AI tools step by step</p></div>', unsafe_allow_html=True)
     
-    # Display lessons in order
+    # Display lessons
     for idx, lesson in enumerate(lessons, 1):
         with st.container():
             st.markdown(f'<div class="lesson-card">', unsafe_allow_html=True)
@@ -269,11 +263,9 @@ def main_page():
             with col_text:
                 st.markdown(f"## {lesson['title']}")
                 st.markdown(lesson["text"])
-                # Read Aloud button using JavaScript SpeechSynthesis
-                # We inject JavaScript to speak the text
+                # Read Aloud button with JavaScript SpeechSynthesis
                 read_btn = st.button(f"🔊 Read Aloud (Lesson {idx})", key=f"read_{idx}")
                 if read_btn:
-                    # Escape the text for JavaScript
                     text_to_speak = lesson["read_aloud"].replace('"', '\\"').replace("\n", " ")
                     js_code = f"""
                     <script>
