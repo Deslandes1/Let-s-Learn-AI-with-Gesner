@@ -61,11 +61,6 @@ st.markdown("""
     .stColumn {
         padding: 0 !important;
     }
-    .nav-buttons {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 1rem;
-    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -113,147 +108,126 @@ lessons = [
         "title": "Lesson 1: ChatGPT – Your AI Assistant",
         "image": "https://upload.wikimedia.org/wikipedia/commons/e/ef/ChatGPT-Logo.svg",
         "text": "**What it does:** ChatGPT by OpenAI is a conversational AI that can answer questions, write code, create content, and more. It supports web browsing, code interpretation, and image generation (DALL-E).\n\n**Setup on Phone:** Download the official ChatGPT app from App Store or Google Play. Sign up with email or Google. Free tier available. For advanced features (GPT-4, plugins), subscribe to ChatGPT Plus ($20/month).\n\n**Setup on Computer:** Visit chat.openai.com. Create an account. Use directly in browser. Install the desktop app (Windows/Mac) for better voice input.",
-        "read_aloud": "ChatGPT by OpenAI is a conversational AI that can answer questions, write code, create content, and more. Setup on phone: download the app. On computer: visit the website.",
         "no_image": False
     },
     {
         "title": "Google Gemini – Lesson 2: Google Gemini – Multimodal Power",
         "image": "",
         "text": "**What it does:** Gemini (formerly Bard) is Google's most advanced AI. It understands text, images, audio, and video. Integrated with Google Workspace (Gmail, Docs, Drive).\n\n**Setup on Phone:** Install Google Gemini app (Android) or use Google app on iOS with Gemini enabled. Sign in with Google account.\n\n**Setup on Computer:** Visit gemini.google.com. Sign in. Use directly. For advanced features, subscribe to Gemini Advanced (part of Google One AI Premium).",
-        "read_aloud": "Google Gemini is Google's most advanced AI. It understands text, images, audio, and video. Setup: use the app on phone or visit the website on computer.",
         "no_image": True
     },
     {
         "title": "Lesson 3: DeepSeek – The Efficient Coder",
         "image": "https://upload.wikimedia.org/wikipedia/commons/e/ec/DeepSeek_logo.svg",
         "text": "**What it does:** DeepSeek is a highly efficient coding and reasoning AI, known for low cost and long context (1 million tokens). Great for programming, math, and technical analysis.\n\n**Setup on Phone:** Use the DeepSeek mobile app (available on official stores) or access via browser at chat.deepseek.com.\n\n**Setup on Computer:** Go to chat.deepseek.com. No login required for basic use. Create account to save chats. Free and open-weight models available.",
-        "read_aloud": "DeepSeek is an efficient coding and reasoning AI. Setup: use the mobile app or visit the website. Free to use.",
         "no_image": False
     },
     {
         "title": "Lesson 4: Grok – Witty & Real‑time",
         "image": "https://abs.twimg.com/responsive-web/client-web/icon-ios.77d25eba.png",
         "text": "**What it does:** Grok by xAI (Elon Musk) is designed to be witty, rebellious, and access real‑time X (Twitter) data. It can answer current events with attitude.\n\n**Setup on Phone:** Download the X app (Twitter). Grok is available to X Premium+ subscribers. No standalone app yet.\n\n**Setup on Computer:** Visit x.com, subscribe to Premium+, then access Grok from the sidebar. Real‑time web and X integration.",
-        "read_aloud": "Grok by xAI is witty and accesses real‑time X data. Setup requires X Premium+ subscription.",
         "no_image": False
     },
     {
         "title": "Lesson 5: Claude – Safe & Ethical AI",
         "image": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Claude_AI_logo.svg",
         "text": "**What it does:** Claude by Anthropic focuses on safety, honesty, and helpfulness. Excellent for long documents (100k+ tokens), analysis, and creative writing.\n\n**Setup on Phone:** Download Claude app from App Store (iOS) or use web browser on Android. Sign up with email.\n\n**Setup on Computer:** Visit claude.ai. Free tier available. Pro plan ($20/month) offers more usage and priority access.",
-        "read_aloud": "Claude by Anthropic is safe and ethical. Good for long documents. Setup via app or website.",
         "no_image": False
     },
     {
         "title": "Lesson 6: GitHub Copilot – AI Pair Programmer",
         "image": "https://upload.wikimedia.org/wikipedia/commons/0/0a/GitHub_Copilot_%282025%29.svg",
         "text": "**What it does:** Copilot suggests code and entire functions in real‑time inside VS Code, JetBrains, and other IDEs. Supports many languages.\n\n**Setup on Phone:** No phone IDE currently. Use GitHub Codespaces on mobile browser with Copilot enabled.\n\n**Setup on Computer:** Install VS Code, install Copilot extension, sign in with GitHub account (free for verified students/teachers, $10/month otherwise).",
-        "read_aloud": "GitHub Copilot is an AI pair programmer that suggests code inside your editor. Setup via VS Code extension.",
         "no_image": False
     },
     {
         "title": "Lesson 7: Perplexity AI – Search + Answer",
         "image": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Perplexity_AI_logo.svg",
         "text": "**What it does:** Perplexity is an AI‑powered search engine that gives direct answers with citations. Pro version can search academic papers, YouTube, and use multiple AI models.\n\n**Setup on Phone:** Install Perplexity app. Sign up with Google/Apple.\n\n**Setup on Computer:** Visit perplexity.ai. Free. Pro subscription ($20/month) unlocks more features.",
-        "read_aloud": "Perplexity AI is an answer engine with citations. Setup via app or website.",
         "no_image": False
     },
     {
         "title": "Midjourney – Lesson 8: Midjourney – AI Image Generator",
         "image": "",
         "text": "**What it does:** Midjourney generates stunning images from text prompts. Runs inside Discord. Known for artistic styles.\n\n**Setup on Phone:** Install Discord, join Midjourney server. Use /imagine command. Free trial limited, then subscription ($10–$120/month).\n\n**Setup on Computer:** Same – use Discord desktop app or web version.",
-        "read_aloud": "Midjourney generates images from text prompts inside Discord. Requires subscription after trial.",
         "no_image": True
     },
     {
         "title": "Lesson 9: DALL‑E 3 – OpenAI's Image Creator",
         "image": "https://upload.wikimedia.org/wikipedia/commons/e/ef/ChatGPT-Logo.svg",
         "text": "**What it does:** DALL‑E 3 integrated into ChatGPT Plus generates highly accurate images from descriptions. Understands complex prompts.\n\n**Setup on Phone:** Use ChatGPT app (Plus subscription).\n\n**Setup on Computer:** chat.openai.com with Plus account. Describe an image and DALL‑E will create it.",
-        "read_aloud": "DALL‑E 3 creates images from text inside ChatGPT Plus. Setup requires ChatGPT subscription.",
         "no_image": False
     },
     {
         "title": "Leonardo.ai – Lesson 10: Leonardo.ai – Free Image Generation",
         "image": "",
         "text": "Leonardo.ai: What it does: Leonardo is a free (daily tokens) image and video generation platform. Many models, fine‑tuning, and canvas editor.\n\nSetup on Phone: Use browser on phone, sign up at leonardo.ai.\n\nSetup on Computer: Visit leonardo.ai, create account. Free tier gives 150 tokens/day.",
-        "read_aloud": "Leonardo.ai is a free image generation platform. Setup via website. 150 free tokens daily.",
         "no_image": True
     },
     {
         "title": "Runway ML – Lesson 11: Runway ML – AI Video Editor",
         "image": "",
         "text": "Runway ML: What it does: Runway provides AI tools for video editing, green screen removal, text‑to‑video, and motion tracking. Used by filmmakers.\n\nSetup on Phone: Runway app for iOS. Sign up.\n\nSetup on Computer: Visit runwayml.com. Free tier with limited exports; paid plans start at $12/month.",
-        "read_aloud": "Runway ML is an AI video editor. Setup via app or website.",
         "no_image": True
     },
     {
         "title": "Lesson 12: ElevenLabs – Voice Cloning & TTS",
         "image": "https://cdn.simpleicons.org/elevenlabs/000000",
         "text": "**What it does:** ElevenLabs creates realistic text‑to‑speech and voice cloning. Used for audiobooks, dubbing, and AI voiceovers.\n\n**Setup on Phone:** Use browser on phone, sign up at elevenlabs.io. No dedicated app yet.\n\n**Setup on Computer:** Visit elevenlabs.io. Free tier offers 10,000 characters/month. Paid plans start at $5/month.",
-        "read_aloud": "ElevenLabs does realistic text‑to‑speech and voice cloning. Setup via website.",
         "no_image": False
     },
     {
         "title": "Stable Diffusion – Lesson 13: Stable Diffusion – Open Source Image Gen",
         "image": "",
         "text": "Stable Diffusion: What it does: Stable Diffusion by Stability AI generates images from text. Can run locally on your own GPU. Many community tools.\n\nSetup on Phone: Use free apps like 'DreamStudio' or web demos. For local, needs powerful phone.\n\nSetup on Computer: Install Automatic1111 WebUI or ComfyUI. Requires Python and GPU. Or use online free demos (Hugging Face).",
-        "read_aloud": "Stable Diffusion is an open‑source image generator. Can run locally or use online demos.",
         "no_image": True
     },
     {
         "title": "Lesson 14: Hugging Face – AI Model Hub",
         "image": "https://huggingface.co/favicon.ico",
         "text": "**What it does:** Hugging Face hosts thousands of free AI models (LLMs, image, audio). Also provides Spaces to run demos and Inference API.\n\n**Setup on Phone:** Use browser to access huggingface.co. Try models on 'Spaces'.\n\n**Setup on Computer:** Create free account. Use 'Inference API' or download models with Transformers library.",
-        "read_aloud": "Hugging Face is a hub for free AI models. Setup via website. No installation needed.",
         "no_image": False
     },
     {
         "title": "Lesson 15: AutoGPT – Autonomous AI Agents",
         "image": "https://upload.wikimedia.org/wikipedia/commons/8/80/Auto_GPT_Logo.png",
         "text": "**What it does:** AutoGPT is an experimental open‑source agent that can chain LLM calls to achieve goals (e.g., research, code, browse web) autonomously.\n\n**Setup on Phone:** Not recommended. Requires Python and API keys.\n\n**Setup on Computer:** Clone GitHub repo, install Python, get OpenAI API key, run in terminal. Or use web versions (AgentGPT).",
-        "read_aloud": "AutoGPT autonomously completes multi‑step tasks. Setup requires Python and API keys.",
         "no_image": False
     },
     {
         "title": "AgentGPT – Lesson 16: AgentGPT – Browser Agent",
         "image": "",
         "text": "AgentGPT: What it does: AgentGPT is a browser‑based AutoGPT alternative. Define a goal, and it will attempt to achieve it using LLM.\n\nSetup on Phone: Use browser on phone, go to agentgpt.com. Requires API key for some features.\n\nSetup on Computer: agentgpt.com – sign in, provide OpenAI API key, start an agent. Easy web interface.",
-        "read_aloud": "AgentGPT runs autonomous agents in your browser. Setup via website with API key.",
         "no_image": True
     },
     {
         "title": "Lesson 17: LangChain – Build LLM Apps",
         "image": "https://cdn.simpleicons.org/langchain/000000",
         "text": "**What it does:** LangChain is a framework for building applications powered by LLMs – chains, agents, retrieval, memory.\n\n**Setup on Phone:** Not for mobile. Use Replit or GitHub Codespaces on mobile browser.\n\n**Setup on Computer:** Install with pip install langchain. Then integrate with OpenAI, Hugging Face, etc. Great for developers.",
-        "read_aloud": "LangChain is a Python framework to build LLM applications. Setup via pip.",
         "no_image": False
     },
     {
         "title": "Lesson 18: LlamaIndex – Data Framework",
         "image": "https://www.llamaindex.ai/favicon.ico",
         "text": "**What it does:** LlamaIndex connects LLMs with your own data (PDFs, databases, APIs). Enables RAG (Retrieval‑Augmented Generation).\n\n**Setup on Phone:** Not suitable. Use cloud notebooks.\n\n**Setup on Computer:** pip install llama-index. Use with OpenAI or local models. Ideal for building Q&A over documents.",
-        "read_aloud": "LlamaIndex connects LLMs to your private data. Setup via pip install.",
         "no_image": False
     },
     {
         "title": "OpenAssistant – Lesson 19: OpenAssistant – Community LLM",
         "image": "",
         "text": "OpenAssistant: What it does: OpenAssistant is a free, open‑source chatbot trained by volunteers. Can be run locally or via demo.\n\nSetup on Phone: Use browser demo at open-assistant.io.\n\nSetup on Computer: Visit open-assistant.io/chat. No login required. For self‑hosting, follow GitHub instructions.",
-        "read_aloud": "OpenAssistant is a free community‑built chatbot. Use online demo or self‑host.",
         "no_image": True
     },
     {
         "title": "Lesson 20: Poe – All‑in‑One AI Platform",
         "image": "https://poe.com/favicon.ico",
         "text": "**What it does:** Poe (Platform for Open Exploration) by Quora gives access to ChatGPT, Claude, Gemini, Llama, and more in one interface. Create custom bots.\n\n**Setup on Phone:** Install Poe app (iOS/Android). Sign up. Free tier includes daily messages. Subscription unlocks more.\n\n**Setup on Computer:** Visit poe.com. Free to use. Integrates many models for comparison.",
-        "read_aloud": "Poe aggregates multiple AI models in one place. Setup via app or website.",
         "no_image": False
     }
 ]
 
 # ---------- MAIN PAGE ----------
 def main_page():
-    # Sidebar
     st.sidebar.markdown("## 🌐 GlobalInternet.py")
     st.sidebar.markdown("---")
     st.sidebar.markdown("### 👨‍💻 Gesner Deslandes")
@@ -265,58 +239,34 @@ def main_page():
     if st.sidebar.button("🚪 Logout"):
         st.session_state.authenticated = False
         st.rerun()
-    
+
     # Lesson selector in sidebar
-    lesson_titles = [f"{i+1}. {lesson['title'].split('–')[0][:40]}" for i, lesson in enumerate(lessons)]
-    # Store current lesson index in session state if not exists
-    if "current_lesson" not in st.session_state:
-        st.session_state.current_lesson = 0
-    
-    # Select lesson via dropdown
-    selected = st.sidebar.selectbox(
-        "📖 Choose a Lesson",
+    lesson_titles = [f"{i+1}. {lesson['title'][:50]}" for i, lesson in enumerate(lessons)]
+    selected_idx = st.sidebar.selectbox(
+        "📖 Select a Lesson",
         options=range(len(lessons)),
         format_func=lambda i: lesson_titles[i],
-        index=st.session_state.current_lesson
+        index=0
     )
-    if selected != st.session_state.current_lesson:
-        st.session_state.current_lesson = selected
-        st.rerun()
-    
-    # Previous and Next buttons in sidebar
-    col1, col2 = st.sidebar.columns(2)
-    with col1:
-        if st.button("◀ Previous", use_container_width=True):
-            if st.session_state.current_lesson > 0:
-                st.session_state.current_lesson -= 1
-                st.rerun()
-    with col2:
-        if st.button("Next ▶", use_container_width=True):
-            if st.session_state.current_lesson < len(lessons)-1:
-                st.session_state.current_lesson += 1
-                st.rerun()
-    
-    st.sidebar.markdown("---")
-    st.sidebar.progress((st.session_state.current_lesson+1)/len(lessons))
-    st.sidebar.markdown(f"**Progress: {st.session_state.current_lesson+1} of {len(lessons)} lessons**")
-    
-    # Main header
-    st.markdown('<div class="main-header"><h1>📘 Let\'s Learn AI with Gesner</h1><p>Master AI tools one lesson at a time</p></div>', unsafe_allow_html=True)
-    
+
     # Display only the selected lesson
-    lesson = lessons[st.session_state.current_lesson]
-    lesson_idx = st.session_state.current_lesson
+    lesson = lessons[selected_idx]
+    lesson_num = selected_idx + 1
+
+    st.markdown('<div class="main-header"><h1>📘 Let\'s Learn AI with Gesner</h1><p>20 Lessons – Master the best AI tools step by step</p></div>', unsafe_allow_html=True)
+
     with st.container():
         st.markdown(f'<div class="lesson-card">', unsafe_allow_html=True)
         if lesson.get("no_image", False):
             st.markdown(f"## {lesson['title']}")
             st.markdown(lesson["text"])
-            read_btn = st.button(f"🔊 Read Aloud (Lesson {lesson_idx+1})", key=f"read_{lesson_idx}")
-            if read_btn:
-                text_to_speak = lesson["read_aloud"].replace('"', '\\"').replace("\n", " ")
+            # Read Aloud button that reads the full lesson text (not just summary)
+            if st.button(f"🔊 Read Aloud (Lesson {lesson_num})", key=f"read_{selected_idx}"):
+                # Remove markdown formatting for cleaner audio (optional)
+                clean_text = lesson["text"].replace('**', '').replace('\n', ' ')
                 js_code = f"""
                 <script>
-                    var utterance = new SpeechSynthesisUtterance("{text_to_speak}");
+                    var utterance = new SpeechSynthesisUtterance("{clean_text.replace('"', '\\"')}");
                     utterance.lang = "en-US";
                     window.speechSynthesis.cancel();
                     window.speechSynthesis.speak(utterance);
@@ -332,12 +282,11 @@ def main_page():
             with col_text:
                 st.markdown(f"## {lesson['title']}")
                 st.markdown(lesson["text"])
-                read_btn = st.button(f"🔊 Read Aloud (Lesson {lesson_idx+1})", key=f"read_{lesson_idx}")
-                if read_btn:
-                    text_to_speak = lesson["read_aloud"].replace('"', '\\"').replace("\n", " ")
+                if st.button(f"🔊 Read Aloud (Lesson {lesson_num})", key=f"read_{selected_idx}"):
+                    clean_text = lesson["text"].replace('**', '').replace('\n', ' ')
                     js_code = f"""
                     <script>
-                        var utterance = new SpeechSynthesisUtterance("{text_to_speak}");
+                        var utterance = new SpeechSynthesisUtterance("{clean_text.replace('"', '\\"')}");
                         utterance.lang = "en-US";
                         window.speechSynthesis.cancel();
                         window.speechSynthesis.speak(utterance);
@@ -346,8 +295,7 @@ def main_page():
                     st.components.v1.html(js_code, height=0)
                     st.success("🔊 Now reading aloud... (make sure your device volume is on)")
         st.markdown('</div>', unsafe_allow_html=True)
-    
-    # Footer
+
     st.markdown(f"""
     <div class="footer">
         <p>© {datetime.now().year} GlobalInternet.py – Built by Gesner Deslandes</p>
