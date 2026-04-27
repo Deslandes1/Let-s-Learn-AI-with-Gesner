@@ -45,6 +45,9 @@ texts = {
         "footer_text": "Built by Gesner Deslandes – GlobalInternet.py",
         "footer_book": "🤖 'Let's Learn AI with Gesner' – Your AI book for the future",
         "language_selector": "🌐 Language",
+        "pricing_title": "💰 Get Lifetime Access",
+        "pricing_monthly": "📅 Monthly Subscription\n$29 USD/month",
+        "pricing_lifetime": "🏷️ Full Package (One-Time)\n$249 USD\n(Includes Source Code + Email Delivery)",
     },
     "fr": {
         "app_title": "🤖 Apprenons l'IA avec Gesner",
@@ -69,6 +72,9 @@ texts = {
         "footer_text": "Construit par Gesner Deslandes – GlobalInternet.py",
         "footer_book": "🤖 'Apprenons l'IA avec Gesner' – Votre livre IA du futur",
         "language_selector": "🌐 Langue",
+        "pricing_title": "💰 Obtenez un accès à vie",
+        "pricing_monthly": "📅 Abonnement mensuel\n29 $US/mois",
+        "pricing_lifetime": "🏷️ Pack complet (Paiement unique)\n249 $US\n(Code source + livraison par e-mail inclus)",
     },
     "es": {
         "app_title": "🤖 Aprendamos IA con Gesner",
@@ -93,6 +99,9 @@ texts = {
         "footer_text": "Construido por Gesner Deslandes – GlobalInternet.py",
         "footer_book": "🤖 'Aprendamos IA con Gesner' – Su libro de IA para el futuro",
         "language_selector": "🌐 Idioma",
+        "pricing_title": "💰 Obtén acceso de por vida",
+        "pricing_monthly": "📅 Suscripción mensual\n$29 USD/mes",
+        "pricing_lifetime": "🏷️ Paquete completo (Pago único)\n$249 USD\n(Incluye código fuente + entrega por correo electrónico)",
     }
 }
 
@@ -575,6 +584,22 @@ st.markdown("""
     .stColumn {
         padding: 0 !important;
     }
+    .pricing-box {
+        background-color: #1e3c72;
+        color: white;
+        border-radius: 15px;
+        padding: 0.8rem;
+        margin: 0.5rem 0;
+        text-align: center;
+    }
+    .pricing-box h4 {
+        margin: 0 0 0.3rem 0;
+        font-size: 1rem;
+    }
+    .pricing-box p {
+        margin: 0;
+        font-size: 0.9rem;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -624,6 +649,7 @@ def main_page():
     selected_lang = st.sidebar.selectbox(_("language_selector"), list(lang_map.keys()), index=["en","fr","es"].index(st.session_state.lang))
     st.session_state.lang = lang_map[selected_lang]
     
+    # Company Info
     st.sidebar.markdown(f"## {_('sidebar_company')}")
     st.sidebar.markdown("---")
     st.sidebar.markdown(f"**{_('sidebar_founder')}**")
@@ -632,6 +658,26 @@ def main_page():
     st.sidebar.markdown("---")
     st.sidebar.markdown(f"[{_('sidebar_website')}](https://globalinternetsitepy-abh7v6tnmskxxnuplrdcgk.streamlit.app)")
     st.sidebar.markdown("---")
+    
+    # Pricing Section in Sidebar
+    st.sidebar.markdown(f"### {_('pricing_title')}")
+    
+    # Monthly Subscription
+    st.sidebar.markdown(f"""
+    <div class="pricing-box">
+        <h4>📅 {_('pricing_monthly')}</h4>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Full Package One-Time
+    st.sidebar.markdown(f"""
+    <div class="pricing-box">
+        <h4>🏷️ {_('pricing_lifetime')}</h4>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.sidebar.markdown("---")
+    
     if st.sidebar.button(_("logout")):
         st.session_state.authenticated = False
         st.rerun()
