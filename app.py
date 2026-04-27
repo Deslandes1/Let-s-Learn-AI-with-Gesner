@@ -49,7 +49,6 @@ st.markdown("""
         margin-bottom: 2rem;
         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         transition: transform 0.2s;
-        scroll-margin-top: 80px;
     }
     .lesson-card:hover { transform: translateY(-5px); }
     .footer {
@@ -61,6 +60,11 @@ st.markdown("""
     }
     .stColumn {
         padding: 0 !important;
+    }
+    .nav-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1rem;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -249,6 +253,7 @@ lessons = [
 
 # ---------- MAIN PAGE ----------
 def main_page():
+    # Sidebar
     st.sidebar.markdown("## 🌐 GlobalInternet.py")
     st.sidebar.markdown("---")
     st.sidebar.markdown("### 👨‍💻 Gesner Deslandes")
@@ -260,44 +265,74 @@ def main_page():
     if st.sidebar.button("🚪 Logout"):
         st.session_state.authenticated = False
         st.rerun()
-
-    # ----- Lesson selector in sidebar -----
-    lesson_titles = [f"{i+1}. {lesson['title'][:50]}" for i, lesson in enumerate(lessons)]
-    selected_lesson_idx = st.sidebar.selectbox(
-        "📖 Jump to Lesson",
+    
+    # Lesson selector in sidebar
+    lesson_titles = [f"{i+1}. {lesson['title'].split('–')[0][:40]}" for i, lesson in enumerate(lessons)]
+    # Store current lesson index in session state if not exists
+    if "current_lesson" not in st.session_state:
+        st.session_state.current_lesson = 0
+    
+    # Select lesson via dropdown
+    selected = st.sidebar.selectbox(
+        "📖 Choose a Lesson",
         options=range(len(lessons)),
         format_func=lambda i: lesson_titles[i],
-        index=0
+        index=st.session_state.current_lesson
     )
-    # Generate anchor links for each lesson
-    st.markdown("""
-    <style>
-        .lesson-anchor {
-            scroll-margin-top: 70px;
-        }
-    </style>
-    """, unsafe_allow_html=True)
-    # Scroll to selected lesson using JavaScript
-    if selected_lesson_idx is not None:
-        st.components.v1.html(f"""
-        <script>
-            var element = document.getElementById('lesson-{selected_lesson_idx}');
-            if(element) {{
-                element.scrollIntoView({{behavior: 'smooth', block: 'start'}});
-            }}
-        </script>
-        """, height=0)
-
-    st.markdown('<div class="main-header"><h1>📘 Let\'s Learn AI with Gesner</h1><p>20 Lessons – Master the best AI tools step by step</p></div>', unsafe_allow_html=True)
+    if selected != st.session_state.current_lesson:
+        st.session_state.current_lesson = selected
+        st.rerun()
     
-    # Display lessons with unique anchor IDs
-    for idx, lesson in enumerate(lessons):
-        with st.container():
-            st.markdown(f'<div class="lesson-card" id="lesson-{idx}">', unsafe_allow_html=True)
-            if lesson.get("no_image", False):
+    # Previous and Next buttons in sidebar
+    col1, col2 = st.sidebar.columns(2)
+    with col1:
+        if st.button("◀ Previous", use_container_width=True):
+            if st.session_state.current_lesson > 0:
+                st.session_state.current_lesson -= 1
+                st.rerun()
+    with col2:
+        if st.button("Next ▶", use_container_width=True):
+            if st.session_state.current_lesson < len(lessons)-1:
+                st.session_state.current_lesson += 1
+                st.rerun()
+    
+    st.sidebar.markdown("---")
+    st.sidebar.progress((st.session_state.current_lesson+1)/len(lessons))
+    st.sidebar.markdown(f"**Progress: {st.session_state.current_lesson+1} of {len(lessons)} lessons**")
+    
+    # Main header
+    st.markdown('<div class="main-header"><h1>📘 Let\'s Learn AI with Gesner</h1><p>Master AI tools one lesson at a time</p></div>', unsafe_allow_html=True)
+    
+    # Display only the selected lesson
+    lesson = lessons[st.session_state.current_lesson]
+    lesson_idx = st.session_state.current_lesson
+    with st.container():
+        st.markdown(f'<div class="lesson-card">', unsafe_allow_html=True)
+        if lesson.get("no_image", False):
+            st.markdown(f"## {lesson['title']}")
+            st.markdown(lesson["text"])
+            read_btn = st.button(f"🔊 Read Aloud (Lesson {lesson_idx+1})", key=f"read_{lesson_idx}")
+            if read_btn:
+                text_to_speak = lesson["read_aloud"].replace('"', '\\"').replace("\n", " ")
+                js_code = f"""
+                <script>
+                    var utterance = new SpeechSynthesisUtterance("{text_to_speak}");
+                    utterance.lang = "en-US";
+                    window.speechSynthesis.cancel();
+                    window.speechSynthesis.speak(utterance);
+                </script>
+                """
+                st.components.v1.html(js_code, height=0)
+                st.success("🔊 Now reading aloud... (make sure your device volume is on)")
+        else:
+            col_img, col_text = st.columns([1, 3])
+            with col_img:
+                if lesson["image"]:
+                    st.image(lesson["image"], width=80)
+            with col_text:
                 st.markdown(f"## {lesson['title']}")
                 st.markdown(lesson["text"])
-                read_btn = st.button(f"🔊 Read Aloud (Lesson {idx+1})", key=f"read_{idx}")
+                read_btn = st.button(f"🔊 Read Aloud (Lesson {lesson_idx+1})", key=f"read_{lesson_idx}")
                 if read_btn:
                     text_to_speak = lesson["read_aloud"].replace('"', '\\"').replace("\n", " ")
                     js_code = f"""
@@ -310,29 +345,9 @@ def main_page():
                     """
                     st.components.v1.html(js_code, height=0)
                     st.success("🔊 Now reading aloud... (make sure your device volume is on)")
-            else:
-                col_img, col_text = st.columns([1, 3])
-                with col_img:
-                    if lesson["image"]:
-                        st.image(lesson["image"], width=80)
-                with col_text:
-                    st.markdown(f"## {lesson['title']}")
-                    st.markdown(lesson["text"])
-                    read_btn = st.button(f"🔊 Read Aloud (Lesson {idx+1})", key=f"read_{idx}")
-                    if read_btn:
-                        text_to_speak = lesson["read_aloud"].replace('"', '\\"').replace("\n", " ")
-                        js_code = f"""
-                        <script>
-                            var utterance = new SpeechSynthesisUtterance("{text_to_speak}");
-                            utterance.lang = "en-US";
-                            window.speechSynthesis.cancel();
-                            window.speechSynthesis.speak(utterance);
-                        </script>
-                        """
-                        st.components.v1.html(js_code, height=0)
-                        st.success("🔊 Now reading aloud... (make sure your device volume is on)")
-            st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
     
+    # Footer
     st.markdown(f"""
     <div class="footer">
         <p>© {datetime.now().year} GlobalInternet.py – Built by Gesner Deslandes</p>
