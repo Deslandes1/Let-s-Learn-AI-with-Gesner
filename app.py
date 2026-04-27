@@ -18,7 +18,6 @@ if "lang" not in st.session_state:
     st.session_state.lang = "en"
 
 def _(key):
-    """Return translated text for UI keys."""
     return texts[st.session_state.lang].get(key, key)
 
 # ---------- UI TRANSLATIONS ----------
@@ -38,11 +37,11 @@ texts = {
         "sidebar_email": "✉️ deslandes78@gmail.com",
         "sidebar_website": "🌍 Visit our website",
         "logout": "🚪 Logout",
-        "jump_to_lesson": "📖 Jump to Lesson",
+        "jump_to_lesson": "📖 Select Lesson",
         "read_aloud_button": "🔊 Read Aloud",
         "reading_success": "🔊 Now reading aloud... (make sure your device volume is on)",
         "main_title": "📘 Let's Learn AI with Gesner",
-        "main_sub": "20 Lessons – Master the best AI tools step by step",
+        "main_sub": "Your selected lesson",
         "footer_text": "Built by Gesner Deslandes – GlobalInternet.py",
         "footer_book": "🤖 'Let's Learn AI with Gesner' – Your AI book for the future",
         "language_selector": "🌐 Language",
@@ -62,11 +61,11 @@ texts = {
         "sidebar_email": "✉️ deslandes78@gmail.com",
         "sidebar_website": "🌍 Visitez notre site web",
         "logout": "🚪 Déconnexion",
-        "jump_to_lesson": "📖 Aller à la leçon",
+        "jump_to_lesson": "📖 Choisir la leçon",
         "read_aloud_button": "🔊 Lire à voix haute",
         "reading_success": "🔊 Lecture en cours... (vérifiez le volume de votre appareil)",
         "main_title": "📘 Apprenons l'IA avec Gesner",
-        "main_sub": "20 leçons – Maîtrisez les meilleurs outils d'IA pas à pas",
+        "main_sub": "Votre leçon sélectionnée",
         "footer_text": "Construit par Gesner Deslandes – GlobalInternet.py",
         "footer_book": "🤖 'Apprenons l'IA avec Gesner' – Votre livre IA du futur",
         "language_selector": "🌐 Langue",
@@ -86,11 +85,11 @@ texts = {
         "sidebar_email": "✉️ deslandes78@gmail.com",
         "sidebar_website": "🌍 Visite nuestro sitio web",
         "logout": "🚪 Cerrar sesión",
-        "jump_to_lesson": "📖 Ir a la lección",
+        "jump_to_lesson": "📖 Seleccionar lección",
         "read_aloud_button": "🔊 Leer en voz alta",
         "reading_success": "🔊 Leyendo en voz alta... (asegúrese de que el volumen de su dispositivo esté activado)",
         "main_title": "📘 Aprendamos IA con Gesner",
-        "main_sub": "20 lecciones – Domine las mejores herramientas de IA paso a paso",
+        "main_sub": "Su lección seleccionada",
         "footer_text": "Construido por Gesner Deslandes – GlobalInternet.py",
         "footer_book": "🤖 'Aprendamos IA con Gesner' – Su libro de IA para el futuro",
         "language_selector": "🌐 Idioma",
@@ -637,29 +636,41 @@ def main_page():
         st.session_state.authenticated = False
         st.rerun()
     
-    # Lesson selector
+    # Lesson selector – only one lesson at a time
     current_lessons = lessons[st.session_state.lang]
     lesson_titles = [f"{i+1}. {l['title'][:60]}" for i, l in enumerate(current_lessons)]
     selected_idx = st.sidebar.selectbox(_("jump_to_lesson"), range(len(current_lessons)), format_func=lambda i: lesson_titles[i], index=0)
-    if selected_idx is not None:
-        st.components.v1.html(f"""
-        <script>
-            var element = document.getElementById('lesson-{selected_idx}');
-            if(element) {{
-                element.scrollIntoView({{behavior: 'smooth', block: 'start'}});
-            }}
-        </script>
-        """, height=0)
     
     st.markdown(f'<div class="main-header"><h1>{_("main_title")}</h1><p>{_("main_sub")}</p></div>', unsafe_allow_html=True)
     
-    for idx, lesson in enumerate(current_lessons):
-        with st.container():
-            st.markdown(f'<div class="lesson-card" id="lesson-{idx}">', unsafe_allow_html=True)
-            if lesson.get("no_image", False):
+    # Display only the selected lesson
+    lesson = current_lessons[selected_idx]
+    with st.container():
+        st.markdown(f'<div class="lesson-card">', unsafe_allow_html=True)
+        if lesson.get("no_image", False):
+            st.markdown(f"## {lesson['title']}")
+            st.markdown(lesson["text"])
+            if st.button(f"{_('read_aloud_button')} ({selected_idx+1})", key=f"read_{selected_idx}"):
+                text_to_speak = lesson["read_aloud"].replace('"', '\\"').replace("\n", " ")
+                js_code = f"""
+                <script>
+                    var utterance = new SpeechSynthesisUtterance("{text_to_speak}");
+                    utterance.lang = "{st.session_state.lang}";
+                    window.speechSynthesis.cancel();
+                    window.speechSynthesis.speak(utterance);
+                </script>
+                """
+                st.components.v1.html(js_code, height=0)
+                st.success(_("reading_success"))
+        else:
+            col_img, col_text = st.columns([1, 3])
+            with col_img:
+                if lesson["image"]:
+                    st.image(lesson["image"], width=80)
+            with col_text:
                 st.markdown(f"## {lesson['title']}")
                 st.markdown(lesson["text"])
-                if st.button(f"{_('read_aloud_button')} ({idx+1})", key=f"read_{idx}"):
+                if st.button(f"{_('read_aloud_button')} ({selected_idx+1})", key=f"read_{selected_idx}"):
                     text_to_speak = lesson["read_aloud"].replace('"', '\\"').replace("\n", " ")
                     js_code = f"""
                     <script>
@@ -671,27 +682,7 @@ def main_page():
                     """
                     st.components.v1.html(js_code, height=0)
                     st.success(_("reading_success"))
-            else:
-                col_img, col_text = st.columns([1, 3])
-                with col_img:
-                    if lesson["image"]:
-                        st.image(lesson["image"], width=80)
-                with col_text:
-                    st.markdown(f"## {lesson['title']}")
-                    st.markdown(lesson["text"])
-                    if st.button(f"{_('read_aloud_button')} ({idx+1})", key=f"read_{idx}"):
-                        text_to_speak = lesson["read_aloud"].replace('"', '\\"').replace("\n", " ")
-                        js_code = f"""
-                        <script>
-                            var utterance = new SpeechSynthesisUtterance("{text_to_speak}");
-                            utterance.lang = "{st.session_state.lang}";
-                            window.speechSynthesis.cancel();
-                            window.speechSynthesis.speak(utterance);
-                        </script>
-                        """
-                        st.components.v1.html(js_code, height=0)
-                        st.success(_("reading_success"))
-            st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
     
     st.markdown(f"""
     <div class="footer">
